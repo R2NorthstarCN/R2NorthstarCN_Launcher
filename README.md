@@ -15,6 +15,9 @@
 
 3.点击运行 NorthstarLauncher.exe 即可启动NorthStarCN.
 
+## 对于更新
+请注意更新新版本文件将会覆盖掉原来配置的文件，请自行备份配置并更新到新文件中
+
 ### 需要更多帮助请点击[这里](https://github.com/R2NorthstarCN/NorthStarCN_WIKI)
 
 <!-- # How to manually edit from Official R2Northstar Releases.
