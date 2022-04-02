@@ -9,11 +9,11 @@
 -->
 # NorthStarCN 客户端发布仓库
 ## 如何下载安装:
-1.从本仓库的Release中下载最新的客户端压缩包
+1.从本仓库的[Release](https://github.com/R2NorthstarCN/R2NorthstarCN_Launcher/releases)中下载最新的客户端压缩包
 
 2.解压下载的客户端压缩包所有文件到泰坦陨落2根目录，确保最后根目录下存在`NorthstarLauncher.exe`和`Titanfall2.exe`文件
 
-3.点击运行 NorthstarLauncher.exe 即可启动NorthStarCN.
+3.在已登录Origin或EA Desktop后，运行 NorthstarLauncher.exe 即可启动NorthStarCN.
 
 ## 对于更新
 请注意更新新版本文件将会覆盖掉原来配置的文件，请自行备份配置并更新到新文件中
