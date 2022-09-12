@@ -1,0 +1,66 @@
+name: build
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+#  workflow_dispatch:
+
+jobs:
+  fetch-northstar-launcher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout binary
+        uses: actions/checkout@v2
+        with:
+          repository: R2NorthstarCN/NorthstarCN_Binaries
+          ref: ${{ env.NORTHSTAR_VERSION }}
+          path: northstar
+      - name: Download compiled stubs
+        run:
+          wget "https://github.com/R2Northstar/NorthstarStubs/releases/download/v1/NorthstarStubs.zip"
+      - name: Checkout core mods
+        uses: actions/checkout@v2
+        with:
+          repository: R2NorthstarCN/R2NorthstarCN_Mods
+          ref: ${{ env.NORTHSTAR_VERSION }}
+          path: northstar-mods
+      - name: Update mod version info
+        run: |
+          export MOD_VERSION=$(echo $NORTHSTAR_VERSION | tr -d 'v')
+          cat <<< $(jq ".Version = \"${MOD_VERSION}\"" northstar-mods/Northstar.Client/mod.json) > northstar-mods/Northstar.Client/mod.json
+          cat <<< $(jq ".Version = \"${MOD_VERSION}\"" northstar-mods/Northstar.Custom/mod.json) > northstar-mods/Northstar.Custom/mod.json
+          cat <<< $(jq ".Version = \"${MOD_VERSION}\"" northstar-mods/Northstar.CustomServers/mod.json) > northstar-mods/Northstar.CustomServers/mod.json
+      - name: Make folder structure
+        run: |
+          mv -v northstar/release/* northstar/.
+          mkdir -p northstar/R2Northstar/mods
+          mkdir -p northstar/R2Northstar/plugins
+          mkdir -p northstar/bin/x64_retail
+          mv -v northstar-launcher/DiscordRPC.dll northstar/R2Northstar/plugins
+          mv -v northstar-launcher/discord_game_sdk.dll northstar
+          mv -v northstar-launcher/wsock32.dll northstar/bin/x64_retail
+          unzip NorthstarStubs.zip -d northstar/bin/x64_dedi
+          mv -v northstar-launcher/* northstar
+          rsync -avr --exclude="Northstar.Coop" --exclude=".git*" northstar-mods/. northstar/R2Northstar/mods
+      - name: Checkout Navmesh repository
+        uses: actions/checkout@v2
+        with:
+          repository: R2Northstar/NorthstarNavs
+          path: northstar-navs
+      - name: Navmeshes setup
+        run: |
+          mkdir -p northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
+          mv -v northstar-navs/graphs northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
+          mv -v northstar-navs/navmesh northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
+      - name: Cleanup root Northstar repository files
+        working-directory: northstar
+        run: |
+          rm -rf .git .github .gitignore *.md LICENSE thunderstore .ci.env.example
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Northstar.release.${{ env.NORTHSTAR_VERSION }}
+          path: northstar
