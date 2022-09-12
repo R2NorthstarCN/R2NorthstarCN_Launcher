@@ -5,10 +5,18 @@ on:
     tags:
       - 'v*'
 
-#  workflow_dispatch:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Job to run'
+        required: true
+        default: 'build-northstarcn'
+        
+env:
+  NORTHSTAR_VERSION: ${{ github.ref_name }}
 
 jobs:
-  fetch-northstar-launcher:
+  build-northstarcn:
     runs-on: ubuntu-latest
 
     steps:
