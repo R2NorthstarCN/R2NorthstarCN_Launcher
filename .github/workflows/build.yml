@@ -25,7 +25,7 @@ jobs:
         with:
           repository: R2NorthstarCN/NorthstarCN_Binaries
           ref: ${{ env.NORTHSTAR_VERSION }}
-          path: northstar
+          path: northstar-launcher
       - name: Download compiled stubs
         run:
           wget "https://github.com/R2Northstar/NorthstarStubs/releases/download/v1/NorthstarStubs.zip"
@@ -43,12 +43,9 @@ jobs:
           cat <<< $(jq ".Version = \"${MOD_VERSION}\"" northstar-mods/Northstar.CustomServers/mod.json) > northstar-mods/Northstar.CustomServers/mod.json
       - name: Make folder structure
         run: |
-          mv -v northstar/release/* northstar/.
           mkdir -p northstar/R2Northstar/mods
           mkdir -p northstar/R2Northstar/plugins
           mkdir -p northstar/bin/x64_retail
-          mv -v northstar-launcher/DiscordRPC.dll northstar/R2Northstar/plugins
-          mv -v northstar-launcher/discord_game_sdk.dll northstar
           mv -v northstar-launcher/wsock32.dll northstar/bin/x64_retail
           unzip NorthstarStubs.zip -d northstar/bin/x64_dedi
           mv -v northstar-launcher/* northstar
