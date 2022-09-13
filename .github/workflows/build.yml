@@ -72,3 +72,6 @@ jobs:
       - name: Clean build
         run: |
           rm -rf northstar
+          rm -rf northstar-mods
+          rm -rf northstar-launcher
+          rm -rf northstar-navs
