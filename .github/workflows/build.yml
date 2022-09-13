@@ -32,7 +32,7 @@ jobs:
       - name: Checkout core mods
         uses: actions/checkout@v2
         with:
-          repository: R2NorthstarCN/R2NorthstarCN_Mods
+          repository: R2NorthstarCN/NorthstarMods
           ref: ${{ env.NORTHSTAR_VERSION }}
           path: northstar-mods
       - name: Update mod version info
