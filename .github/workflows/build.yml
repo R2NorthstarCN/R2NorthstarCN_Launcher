@@ -69,9 +69,3 @@ jobs:
         with:
           name: Northstar.release.${{ env.NORTHSTAR_VERSION }}
           path: northstar
-      - name: Clean build
-        run: |
-          rm -rf northstar
-          rm -rf northstar-mods
-          rm -rf northstar-launcher
-          rm -rf northstar-navs
