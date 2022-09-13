@@ -64,7 +64,6 @@ jobs:
       - name: Create ZIP
         run: |
           cd northstar ; zip -r ../northstar.zip . * ; cd ..
-          # zip -r northstar.zip northstar/*
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
