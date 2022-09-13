@@ -69,3 +69,6 @@ jobs:
         with:
           name: Northstar.release.${{ env.NORTHSTAR_VERSION }}
           path: northstar
+      - name: Clean build
+        run: |
+          rm -rf northstar
