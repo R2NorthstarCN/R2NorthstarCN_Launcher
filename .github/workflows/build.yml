@@ -63,7 +63,7 @@ jobs:
           path: northstar
       - name: Create ZIP
         run: |
-          zip -r northstar.zip northstar/*
+          cd northstar ; zip -r ../northstar.zip . * ; cd ..
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
         env:
