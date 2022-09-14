@@ -52,10 +52,11 @@ jobs:
           mkdir -p northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
           mv -v northstar-navs/graphs northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
           mv -v northstar-navs/navmesh northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
-      - name: Cleanup root Northstar repository files
+      - name: Cleanup Northstar repository files
         working-directory: northstar
         run: |
           rm -rf .git .github .gitignore *.md LICENSE thunderstore .ci.env.example
+          rm -rf R2Northstar/mods/LICENSE R2Northstar/mods/*.md
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
