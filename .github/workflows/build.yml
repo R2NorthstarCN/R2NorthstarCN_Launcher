@@ -2,7 +2,7 @@ name: build
 
 on:
   release:
-    types: [created]
+    types: [published]
         
 env:
   NORTHSTAR_VERSION: ${{ github.event.release.tag_name }}
