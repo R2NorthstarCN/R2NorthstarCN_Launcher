@@ -38,6 +38,7 @@ jobs:
           mkdir -p northstar/R2Northstar/mods
           mkdir -p northstar/R2Northstar/plugins
           mkdir -p northstar/bin/x64_retail
+          mv -v northstar-launcher/placeholder_playerdata.pdata northstar/R2Northstar
           mv -v northstar-launcher/wsock32.dll northstar/bin/x64_retail
           unzip NorthstarStubs.zip -d northstar/bin/x64_dedi
           mv -v northstar-launcher/* northstar
