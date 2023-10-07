@@ -43,16 +43,6 @@ jobs:
           unzip NorthstarStubs.zip -d northstar/bin/x64_dedi
           mv -v northstar-launcher/* northstar
           rsync -avr --exclude="Northstar.Coop" --exclude=".git*" northstar-mods/. northstar/R2Northstar/mods
-      - name: Checkout Navmesh repository
-        uses: actions/checkout@v2
-        with:
-          repository: R2Northstar/NorthstarNavs
-          path: northstar-navs
-      - name: Navmeshes setup
-        run: |
-          mkdir -p northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
-          mv -v northstar-navs/graphs northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
-          mv -v northstar-navs/navmesh northstar/R2Northstar/mods/Northstar.CustomServers/mod/maps
       - name: Cleanup Northstar repository files
         working-directory: northstar
         run: |
